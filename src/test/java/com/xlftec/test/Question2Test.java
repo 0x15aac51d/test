@@ -29,7 +29,9 @@ class Question2Test {
     }
 
     private static void assertMapEqual(Map<String, Object> target, Map<String, Object> source) {
+        Assertions.assertEquals(target.entrySet().size(), source.entrySet().size());
         for (Map.Entry<String, Object> entry : target.entrySet()) {
+            Assertions.assertNotNull(source.get(entry.getKey()));
             if (entry.getValue() instanceof String) {
                 Assertions.assertEquals(entry.getValue(), source.get(entry.getKey()));
             } else {
