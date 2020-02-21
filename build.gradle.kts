@@ -40,3 +40,16 @@ val test by tasks.getting(Test::class) {
     // Use junit platform for unit tests
     useJUnitPlatform()
 }
+
+
+tasks {
+    javadoc {
+        options.encoding = "UTF-8"
+    }
+    compileJava {
+        options.encoding = "UTF-8"
+    }
+    compileTestJava {
+        options.encoding = "UTF-8"
+    }
+}
