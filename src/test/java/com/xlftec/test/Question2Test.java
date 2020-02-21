@@ -17,13 +17,12 @@ class Question2Test {
         source.put("CC.D.E", "4");
         source.put("CC.D.F", "5");
 
-        Map<String, Object> target = new HashMap<>();
-
-        target.put("A", "1");
-        path(target).path("B").getMap().put("A", "2");
-        path(target).path("B").getMap().put("B", "3");
-        path(target).path("CC").path("D").getMap().put("E", "4");
-        path(target).path("CC").path("D").getMap().put("F", "5");
+        Map<String, Object> target = path().end("A", "1")
+                .newPath().path("B").end("A", "2")
+                .newPath().path("B").end("B", "3")
+                .newPath().path("CC").path("D").end("E", "4")
+                .newPath().path("CC").path("D").end("F", "5")
+                .getMap();
 
         assertMapEqual(target, Question2.rebuild(source));
     }
@@ -41,10 +40,12 @@ class Question2Test {
     }
 
     private static class PathFinder {
+        private Map<String, Object> firstNode;
         private Map<String, Object> pathNode;
 
         private PathFinder(Map<String, Object> pathNode) {
-            this.pathNode = pathNode;
+            this.firstNode = pathNode;
+            this.pathNode = firstNode;
         }
 
         public PathFinder path(String path) {
@@ -53,12 +54,26 @@ class Question2Test {
         }
 
         public Map<String, Object> getMap() {
-            return pathNode;
+            return firstNode;
+        }
+
+        public PathFinder end(String key, String value) {
+            pathNode.put(key, value);
+            return this;
+        }
+
+        public PathFinder newPath() {
+            this.pathNode = firstNode;
+            return this;
         }
     }
 
     private static PathFinder path(Map<String, Object> pathMap) {
         return new PathFinder(pathMap);
+    }
+
+    private static PathFinder path() {
+        return new PathFinder(new HashMap<>());
     }
 
 }
