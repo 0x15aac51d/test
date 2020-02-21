@@ -1,13 +1,9 @@
 package com.xlftec.test;
 
-
 import java.util.Comparator;
-
 import static com.xlftec.test.Util.swap;
 
 public class Question1 {
-
-
 
     public static void partition(int[] array) {
         partition(array, Util.decendingOrder);
