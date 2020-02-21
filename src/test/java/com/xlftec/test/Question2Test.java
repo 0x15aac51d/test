@@ -39,16 +39,16 @@ class Question2Test {
         }
     }
 
-    private static class PathFinder {
+    private static class PathBuilder {
         private Map<String, Object> firstNode;
         private Map<String, Object> pathNode;
 
-        private PathFinder(Map<String, Object> pathNode) {
+        private PathBuilder(Map<String, Object> pathNode) {
             this.firstNode = pathNode;
             this.pathNode = firstNode;
         }
 
-        public PathFinder path(String path) {
+        public PathBuilder path(String path) {
             this.pathNode = (Map<String, Object>) pathNode.computeIfAbsent(path, key -> new HashMap<String, Object>());
             return this;
         }
@@ -57,23 +57,23 @@ class Question2Test {
             return firstNode;
         }
 
-        public PathFinder end(String key, String value) {
+        public PathBuilder end(String key, String value) {
             pathNode.put(key, value);
             return this;
         }
 
-        public PathFinder newPath() {
+        public PathBuilder newPath() {
             this.pathNode = firstNode;
             return this;
         }
     }
 
-    private static PathFinder path(Map<String, Object> pathMap) {
-        return new PathFinder(pathMap);
+    private static PathBuilder path(Map<String, Object> pathMap) {
+        return new PathBuilder(pathMap);
     }
 
-    private static PathFinder path() {
-        return new PathFinder(new HashMap<>());
+    private static PathBuilder path() {
+        return new PathBuilder(new HashMap<>());
     }
 
 }
