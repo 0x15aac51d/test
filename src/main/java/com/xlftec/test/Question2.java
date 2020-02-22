@@ -17,7 +17,7 @@ public class Question2 {
 
     private static void setValue(Map<String, Object> map, String[] paths, String value) {
         Map<String, Object> lastNode = map;
-        int lastPathIndex = paths.length > 1 ? paths.length - 2 : -1;
+        int lastPathIndex = paths.length - 2;
         String itemKey = paths[lastPathIndex + 1];
         for (int i = 0; i <= lastPathIndex; i++) {
             String currentPath = paths[i];

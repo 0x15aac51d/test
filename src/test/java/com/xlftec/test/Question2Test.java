@@ -17,7 +17,8 @@ class Question2Test {
         source.put("CC.D.E", "4");
         source.put("CC.D.F", "5");
 
-        Map<String, Object> target = path().end("A", "1")
+        Map<String, Object> target = path()
+                .newPath().end("A", "1")
                 .newPath().path("B").end("A", "2")
                 .newPath().path("B").end("B", "3")
                 .newPath().path("CC").path("D").end("E", "4")
